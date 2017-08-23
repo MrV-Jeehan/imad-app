@@ -5,20 +5,54 @@ var path = require('path');
 var app = express();
 app.use(morgan('combined'));
 
-var ArticleOne = {
-    title: 'Article One',
-    heading: 'This is Article',
-    date: 'Aug 23,2017',
-    content: `
-        <p>
-            This is the main Content.
-        </p>
-        <p>
-            Yet Agin i write Something.
-        </p>
-        <p>
-            And again i follows the same order.
-        </p>`
+var Articles = {
+    'article-one': {
+        title: 'Article One',
+        heading: 'This is Article',
+        date: 'Aug 23,2017',
+        content: `
+            <p>
+                This is the main Content.
+            </p>
+            <p>
+                Yet Agin i write Something.
+            </p>
+            <p>
+                And again i follows the same order.
+            </p>`
+    },
+    'article-two': {
+        title: 'Article Two',
+        heading: 'This is Article Two',
+        date: 'Aug 23,2017',
+        content: `
+            <p>
+                This is the main Content jgdfjf.
+            </p>
+            <p>
+                Yet Agin i write Something.
+            </p>
+            <p>
+                And again i follows the same order.
+            </p>
+            `
+    },
+    'article-three': {
+        title: 'Article Three',
+        heading: 'This is Article three',
+        date: 'Aug 23,2017',
+        content: `
+            <p>
+                This is the main Contenhag jagaidhit.
+            </p>
+            <p>
+                Yet Agin i write Something.
+            </p>
+            <p>
+                And again i follows the same order.
+            </p>
+            `
+    }
 };
 
 function createTemp(data){
@@ -63,8 +97,9 @@ app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
 
-app.get('/article-one', function(req,res){
-    res.send(createTemp(ArticleOne));
+app.get('/:articlename', function(req,res){
+    var articlename = req.params.articlename;
+    res.send(createTemp(Articles[articlename]));
 });
 
 app.get('/article-two', function(req,res){
