@@ -5,12 +5,66 @@ var path = require('path');
 var app = express();
 app.use(morgan('combined'));
 
+var ArticleOne = {
+    title: 'Article One',
+    heading: 'This is Article',
+    date: 'Aug 23,2017',
+    content: `
+        <p>
+            This is the main Content.
+        </p>
+        <p>
+            Yet Agin i write Something.
+        </p>
+        <p>
+            And again i follows the same order.
+        </p>`
+};
+
+function createTemp(data){
+    var title= data.title;
+    var heading = data.heading;
+    var date = data.date;
+    var content = data.content;
+    
+    var htmlTemp = `
+    <html>
+        <head>
+            <title>
+                ${title}
+            </title>
+            <meta name="viewport" content="width-device-width, initial-scale=1" />
+            <link href="/ui/style.css" rel="stylesheet" />
+        </head>
+        <body>
+            <div class="Contain">
+                <div>
+                    <a href="/">Home</a>
+                </div>
+                <hr/>
+                <h3>
+                    ${heading}
+                </h3>
+                <div>
+                    ${date}
+                </div>
+                <div>
+                    ${content}
+                </div>
+            </div>
+        </body>
+    </html>
+
+    `;
+    return htmlTemp;
+}
+
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
 
 app.get('/article-one', function(req,res){
-    res.sendFile(path.join(__dirname, 'ui', 'article-one.html'));
+    res.send(createTemp(ArticleOne));
 });
 
 app.get('/article-two', function(req,res){
