@@ -15,7 +15,7 @@ button.onclick = function () {
         }  
    };
    
-   request.open('GET',"http://http://vikas71845.imad.hasura-app.io/counter",true);
+   request.open('GET',"http://vikas71845.imad.hasura-app.io/counter",true);
    request.send(null); 
    
 };
